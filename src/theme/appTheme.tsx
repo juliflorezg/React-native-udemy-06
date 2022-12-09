@@ -21,18 +21,10 @@ export const styles = StyleSheet.create({
     fontSize: 30,
     textAlign: 'right',
   },
-  boton: {
-    width: 80,
-    height: 80,
-    backgroundColor: '#9b9b9b',
-    borderRadius: 100,
+  fila: {
+    flexDirection: 'row',
     justifyContent: 'center',
-  },
-  botonTexto: {
-    textAlign: 'center',
-    padding: 10,
-    fontSize: 30,
-    color: 'black',
-    fontWeight: '300',
+    marginBottom: 18,
+    paddingHorizontal: 10,
   },
 });
