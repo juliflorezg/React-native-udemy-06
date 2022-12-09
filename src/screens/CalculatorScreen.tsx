@@ -51,6 +51,25 @@ export const CalculatorScreen = () => {
     }
   };
 
+  const delDigit = () => {
+    setNumber(currentNumber => {
+      let newNumber = '';
+
+      if (currentNumber.length === 1) {
+        newNumber = '0';
+        return newNumber;
+      } else if (currentNumber.startsWith('-') && currentNumber.length === 2) {
+        newNumber = '0';
+        return newNumber;
+      } else {
+        newNumber = currentNumber.slice(0, -1);
+        return newNumber;
+      }
+
+      // return '';
+    });
+  };
+
   return (
     <View style={styles.calculadoraContainer}>
       <Text style={styles.resultadoPequeno}>{previousNumber}</Text>
@@ -66,7 +85,7 @@ export const CalculatorScreen = () => {
           backgroundColor="#9b9b9b"
           action={makeNegativeNumber}
         />
-        <BotonCalc text="del" backgroundColor="#9b9b9b" action={clean} />
+        <BotonCalc text="del" backgroundColor="#9b9b9b" action={delDigit} />
         <BotonCalc text="/" backgroundColor="#ff9427" action={clean} />
       </View>
       <View style={styles.fila}>
