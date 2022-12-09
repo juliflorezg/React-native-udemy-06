@@ -3,7 +3,7 @@ import {useRef, useState} from 'react';
 type Operaciones = 'sumar' | 'restar' | 'multiplicar' | 'dividir';
 
 export const useCalculator = () => {
-  const [number, setNumber] = useState('100');
+  const [number, setNumber] = useState('0');
   const [previousNumber, setPreviousNumber] = useState('0');
   const lastOperation = useRef<Operaciones>();
 
@@ -30,7 +30,7 @@ export const useCalculator = () => {
       else if (textNumber === '0' && number.includes('.')) {
         setNumber(number + textNumber);
       }
-      //test if it's other than 0 and there's no decimal point
+      //test if it is other than 0 and there is no decimal point
       else if (textNumber !== '0' && !number.includes('.')) {
         setNumber(textNumber);
       }
@@ -67,8 +67,6 @@ export const useCalculator = () => {
         newNumber = currentNumber.slice(0, -1);
         return newNumber;
       }
-
-      // return '';
     });
   };
 
