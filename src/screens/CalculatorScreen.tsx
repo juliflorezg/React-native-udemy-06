@@ -101,6 +101,39 @@ export const CalculatorScreen = () => {
     lastOperation.current = 'sumar';
   };
 
+  const performCalculation = () => {
+    const firstNum = Number(previousNumber);
+    const secondNum = Number(number);
+
+    switch (lastOperation.current) {
+      case 'sumar':
+        setNumber(`${firstNum + secondNum}`);
+
+        break;
+      case 'restar':
+        setNumber(`${firstNum - secondNum}`);
+
+        break;
+      case 'multiplicar':
+        setNumber(`${firstNum * secondNum}`);
+
+        break;
+      case 'dividir':
+        if (secondNum === 0) {
+          setNumber('Math error');
+        } else {
+          if (Number.isNaN(firstNum / secondNum)) {
+            setNumber('Error');
+          } else {
+            setNumber(`${firstNum / secondNum}`);
+          }
+        }
+        break;
+    }
+
+    setPreviousNumber('0');
+  };
+
   return (
     <View style={styles.calculadoraContainer}>
       {previousNumber !== '0' && (
@@ -142,7 +175,7 @@ export const CalculatorScreen = () => {
       <View style={styles.fila}>
         <BotonCalc text="0" isWide action={buildNumber} />
         <BotonCalc text="." action={buildNumber} />
-        <BotonCalc text="=" action={clean} />
+        <BotonCalc text="=" action={performCalculation} />
       </View>
     </View>
   );
