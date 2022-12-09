@@ -13,7 +13,42 @@ export const CalculatorScreen = () => {
   };
 
   const buildNumber = (textNumber: string) => {
-    setNumber(number + textNumber);
+    //number can't contain multiple decimal points
+    if (number.includes('.') && textNumber === '.') {
+      return;
+    }
+
+    if (number.startsWith('0') || number.startsWith('-0')) {
+      setNumber(textNumber);
+      // decimal point
+      if (textNumber === '.') {
+        setNumber(number + textNumber);
+      }
+      //test for other 0 and a decimal point present
+      else if (textNumber === '0' && number.includes('.')) {
+        setNumber(number + textNumber);
+      }
+      //test if it's other than 0 and there's no decimal point
+      else if (textNumber !== '0' && !number.includes('.')) {
+        setNumber(textNumber);
+      }
+      // test for multiple 0 at the beginning
+      else if (textNumber === '0' && !number.includes('.')) {
+        setNumber(number);
+      } else {
+        setNumber(number + textNumber);
+      }
+    } else {
+      setNumber(number + textNumber);
+    }
+  };
+
+  const makeNegativeNumber = () => {
+    if (number.includes('-')) {
+      setNumber(number.replace('-', ''));
+    } else {
+      setNumber('-' + number);
+    }
   };
 
   return (
@@ -26,7 +61,11 @@ export const CalculatorScreen = () => {
       {/* Fila de botones */}
       <View style={styles.fila}>
         <BotonCalc text="C" backgroundColor="#9b9b9b" action={clean} />
-        <BotonCalc text="+/-" backgroundColor="#9b9b9b" action={clean} />
+        <BotonCalc
+          text="+/-"
+          backgroundColor="#9b9b9b"
+          action={makeNegativeNumber}
+        />
         <BotonCalc text="del" backgroundColor="#9b9b9b" action={clean} />
         <BotonCalc text="/" backgroundColor="#ff9427" action={clean} />
       </View>
